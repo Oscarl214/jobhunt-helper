@@ -30,6 +30,7 @@ model Application {
    status      String
    resume      String?
    coverletter String?
+   notes String?
    createdAt   DateTime @default(now())
    updatedAt   DateTime @updatedAt
 }
