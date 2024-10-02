@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nextui-org/react": "^2.4.8",
     "@prisma/client": "^5.20.0",
     "@types/node": "22.7.4",
     "@types/react": "18.3.10",
