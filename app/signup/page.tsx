@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import InputB from './Input';
-
+import SignUpButton from './SignUpButton';
 import CatLaptop from '../../public/CatLaptop.png';
 const SignUpPage = () => {
   return (
@@ -14,8 +14,9 @@ const SignUpPage = () => {
           height={200}
           width={200}
         />
-        <div className="flex justify-center items-start">
+        <div className="flex flex-col justify-center items-center gap-2">
           <InputB />
+          <SignUpButton />
         </div>
       </form>
     </div>
