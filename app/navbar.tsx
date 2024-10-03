@@ -33,24 +33,26 @@ const NavBar = () => {
           src={Logo.src}
         />
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            DashBoard
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Applications
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
       {status === 'authenticated' ? (
-        <NavbarContent>
-          <NavbarItem>
-            <Link href="/api/auth/signout">LogOut</Link>
-          </NavbarItem>
-        </NavbarContent>
+        <>
+          <NavbarContent className="hidden sm:flex gap-4" justify="center">
+            <NavbarItem>
+              <Link color="foreground" href="#">
+                Dashboard
+              </Link>
+            </NavbarItem>
+            <NavbarItem isActive>
+              <Link href="#" aria-current="page">
+                Applications
+              </Link>
+            </NavbarItem>
+          </NavbarContent>
+          <NavbarContent>
+            <NavbarItem>
+              <Link href="/api/auth/signout">LogOut</Link>
+            </NavbarItem>
+          </NavbarContent>
+        </>
       ) : (
         <NavbarContent justify="end">
           <NavbarItem className="hidden lg:flex">
