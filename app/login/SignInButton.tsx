@@ -1,10 +1,12 @@
 import React from 'react';
-
+import Link from 'next/link';
 const SignInButton = () => {
   return (
     <div>
       {' '}
-      <button className="btn btn-secondary">SignIn</button>
+      <Link href="/api/auth/signin" className="btn btn-secondary">
+        Login
+      </Link>
     </div>
   );
 };

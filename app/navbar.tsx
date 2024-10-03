@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   Navbar,
@@ -9,11 +10,18 @@ import {
   Button,
 } from '@nextui-org/react';
 import Logo from '../public/logo-no-background.png';
+import { useSession } from 'next-auth/react';
 
 interface Logo {
   src: string;
 }
 const NavBar = () => {
+  const { status, data: session } = useSession();
+
+  if (status === 'loading') {
+    return null;
+  }
+
   return (
     <Navbar className="bg-white">
       <NavbarBrand>
@@ -37,16 +45,19 @@ const NavBar = () => {
           </Link>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="/login">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="/signup" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
+      {status === 'authenticated' ? (
+        <NavbarContent>
+          <NavbarItem>
+            <Link href="/api/auth/signout">LogOut</Link>
+          </NavbarItem>
+        </NavbarContent>
+      ) : (
+        <NavbarContent justify="end">
+          <NavbarItem className="hidden lg:flex">
+            <Link href="/login">Login</Link>
+          </NavbarItem>
+        </NavbarContent>
+      )}
     </Navbar>
   );
 };
