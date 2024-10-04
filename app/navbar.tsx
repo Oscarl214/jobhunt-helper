@@ -23,7 +23,7 @@ const NavBar = () => {
   }
 
   return (
-    <Navbar className="bg-white">
+    <Navbar className="bg-white h-[150px]">
       <NavbarBrand>
         <Image
           alt="Jon Hunter AI Logo"
@@ -36,18 +36,30 @@ const NavBar = () => {
       {status === 'authenticated' ? (
         <>
           <NavbarContent className="hidden sm:flex gap-4" justify="center">
-            <NavbarItem>
-              <Link color="foreground" href="#">
+            <NavbarItem isActive>
+              <Link href="/" aria-current="page">
                 Dashboard
               </Link>
             </NavbarItem>
+            <NavbarItem className="flex flex-col gap-2 justify-center items-center">
+              <Image
+                height={50}
+                width={50}
+                src={`${session.user!.image}`}
+                alt="Google Picture"
+                className="rounded-md"
+              />
+              <p className="font-bold text-md text-black">
+                Welcome, {session.user!.name}
+              </p>
+            </NavbarItem>
             <NavbarItem isActive>
-              <Link href="#" aria-current="page">
+              <Link href="/applications" aria-current="page">
                 Applications
               </Link>
             </NavbarItem>
           </NavbarContent>
-          <NavbarContent>
+          <NavbarContent justify="end">
             <NavbarItem>
               <Link href="/api/auth/signout">LogOut</Link>
             </NavbarItem>
