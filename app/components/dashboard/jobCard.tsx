@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-
+import { motion } from 'framer-motion';
 import CatJob from '@/public/CatJob.webp';
 import CatCoder from '@/public/CatCoder.png';
 import CatDocter from '@/public/CatDoc.png';
@@ -126,7 +126,12 @@ const JobPostingCard = () => {
           </span>
         </div>
       ) : jobListings.length > 1 ? (
-        <div className="flex justify-center flex-col gap-2 mt-5">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+          className="flex justify-center flex-col gap-2 mt-5"
+        >
           {jobListings.map((job, index) => (
             <div
               key={index}
@@ -137,14 +142,14 @@ const JobPostingCard = () => {
               </figure>
               <div className="card-body">
                 <h2 className="card-title">Job Listing {index + 1}</h2>
-                <p>{job}</p>
+                <p className="overflow-auto">{job}</p>
                 <div className="card-actions justify-end">
                   <button className="btn btn-primary">Apply Now</button>
                 </div>
               </div>
             </div>
           ))}
-        </div>
+        </motion.div>
       ) : (
         <div className="flex justify-center m-2">
           <p>Click a button to prefer choice of listings</p>
