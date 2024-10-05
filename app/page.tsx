@@ -15,10 +15,13 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>
+    <main className="flex min-h-screen flex-col items-center justify-between p-24 flex-wrap">
+      <div className="flex justify-start items-start flex-col w-full m-2">
+        <h2 className=" m-2 text-black font-bold text-lg lg:text-5xl text-center">
+          Job Board
+        </h2>
         <JobPostingCard />
-      </h1>
+      </div>
     </main>
   );
 }

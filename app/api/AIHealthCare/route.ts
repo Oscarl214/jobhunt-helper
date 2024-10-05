@@ -5,14 +5,17 @@ import { error } from 'console';
 const apiKey = process.env.CHAT_API;
 const openai = new OpenAI({ apiKey: apiKey });
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
+
+  const { topic } = await request.json();
 
   const jobsDetails = `Help me find open positions for the
    following: health educator, health science degree,patient care tech,
     patient service representative,PAS specialist, patient financial account specialist, 
     ambulatory representative. Preferably the jobs to be entry level or less than a year
-    expierence and located in Dallas, Texas or remote from anywhere. Also help me find jobs for a full stack developer, front end developer, backend developer. Also within Dallas, or fully remote. Keep it entry level.`;
+    expierence and located in Dallas, Texas or remote from anywhere.
+    Only share job postings based on the details I provide & the prompt selected.Don't reply back to me, only reply the job postings.`;
 
   try {
     if (!session) {
@@ -23,12 +26,12 @@ export async function GET(request: Request) {
       messages: [
         {
           role: 'system',
-          content: `You are an assistant that will help me and my partner find jobs within our fields. Only share job postings based on the details we provide. Here they are: ${jobsDetails}`,
+          content: `You are an assistant that will help me find jobs within my field. Only share job postings based on the details provided & prompt selected. Share different openings upon being prompted.
+           Here they are: ${jobsDetails}`,
         },
         {
           role: 'user',
-          content:
-            'Please provide the latest job postings based on the job details above.Give back each job posting as its own object.',
+          content: topic,
         },
       ],
       model: 'gpt-4',
