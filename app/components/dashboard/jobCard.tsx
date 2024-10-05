@@ -8,7 +8,9 @@ import CatDocter from '@/public/CatDoc.png';
 const JobPostingCard = () => {
   const [jobListings, setJobListings] = useState<[]>([]);
   const [loading, setLoading] = useState(false);
-
+  const [activeButton, setActiveButton] = useState<
+    'developer' | 'healthcare' | null
+  >(null);
   const fetchDeveloperJobData = async () => {
     setLoading(true);
     let developer = 'developer';
@@ -75,14 +77,27 @@ const JobPostingCard = () => {
       setLoading(false);
     }
   };
+
+  const handleDeveloperClick = () => {
+    setActiveButton('developer');
+    fetchDeveloperJobData();
+  };
+
+  const handleHealthcareClick = () => {
+    setActiveButton('healthcare');
+    fetchHealthCareJobData();
+  };
+
   return (
     <div>
       <div className="flex justify-center flex-row gap-2 flex-wrap">
         <div className="flex flex-col gap-2">
           <Image src={CatCoder} alt="Cat Doc Avatar" height={200} width={200} />
           <button
-            className="btn btn-primary  hover:bg-inherit"
-            onClick={fetchDeveloperJobData}
+            className={`btn text-black hover:bg-inherit ${
+              activeButton === 'developer' ? 'bg-blue-500' : 'bg-gray-400'
+            }`}
+            onClick={handleDeveloperClick}
           >
             DeveloperJobs
           </button>
@@ -95,8 +110,10 @@ const JobPostingCard = () => {
             width={200}
           />
           <button
-            className="btn btn-primary hover:bg-inherit"
-            onClick={fetchHealthCareJobData}
+            className={`btn text-black hover:bg-inherit ${
+              activeButton === 'healthcare' ? 'bg-green-500' : 'bg-gray-400'
+            }`}
+            onClick={handleHealthcareClick}
           >
             Healthcare Jobs
           </button>
