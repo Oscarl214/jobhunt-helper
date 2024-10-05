@@ -37,7 +37,7 @@ const NavBar = () => {
         <>
           <NavbarContent className="hidden sm:flex gap-4" justify="center">
             <NavbarItem isActive>
-              <Link href="/" aria-current="page">
+              <Link href="/" className="hover:underline" aria-current="page">
                 Dashboard
               </Link>
             </NavbarItem>
@@ -54,7 +54,11 @@ const NavBar = () => {
               </p>
             </NavbarItem>
             <NavbarItem isActive>
-              <Link href="/applications" aria-current="page">
+              <Link
+                href="/applications"
+                className="hover:underline"
+                aria-current="page"
+              >
                 Applications
               </Link>
             </NavbarItem>
