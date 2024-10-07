@@ -99,7 +99,7 @@ const JobPostingCard = () => {
             }`}
             onClick={handleDeveloperClick}
           >
-            DeveloperJobs
+            Developer Jobs
           </button>
         </div>
         <div className="flex flex-col gap-2">
@@ -135,9 +135,9 @@ const JobPostingCard = () => {
           {jobListings.map((job, index) => (
             <div
               key={index}
-              className="card border-3 bg-white-400 w-96 shadow-xl text-black"
+              className="card border-2 border-[#7480ff] border-3 bg-white-400 w-96 shadow-xl text-black"
             >
-              <figure className="hover:border-[#7480ff] cursor-pointer">
+              <figure className=" cursor-pointer">
                 <Image src={CatJob} alt="Job Image" width={400} height={400} />
               </figure>
               <div className="card-body">

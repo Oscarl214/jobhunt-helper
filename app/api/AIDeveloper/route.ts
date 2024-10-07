@@ -2,6 +2,7 @@ import OpenAI from 'openai';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]/route';
 import { error } from 'console';
+
 const apiKey = process.env.CHAT_API;
 const openai = new OpenAI({ apiKey: apiKey });
 
@@ -23,7 +24,9 @@ export async function POST(request: Request) {
       messages: [
         {
           role: 'system',
-          content: `You are an assistant that will help me find jobs within the prompted field. Only share job postings based on the details I provide & the prompt selected.Share different openings upon being prompted.
+          content: `You are an assistant that will help me find jobs within the prompted field.
+           Only share job postings based on the details I provide & the prompt selected.
+           Share different openings upon being prompted. Share only postings from this year and list when the posting was posted.
            Here they are: ${jobsDetails}`,
         },
         {
