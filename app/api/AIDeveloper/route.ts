@@ -11,9 +11,12 @@ export async function POST(request: Request) {
 
   const { topic } = await request.json();
 
-  const jobsDetails = `Full stack developer, 
-    front end developer, backend developer. 
-   Within Dallas, or fully remote. Keep it entry level. Return 3 new positions every time you get prompted. Don't reply back to me, only reply the job postings. `;
+  const jobsDetails = `I am looking for job boards that list positions in the following fields: 
+    full stack developer, front end developer, and backend developer. 
+    These positions should be entry-level and located in Dallas, Texas, or available remotely.
+    Please provide job boards that specifically target tech positions, entry-level opportunities, 
+    and both large, well-known platforms and niche, smaller job boards.
+    Only share job boards and do not include individual job listings. Share the link to the job boards. `;
 
   try {
     if (!session) {
@@ -24,10 +27,8 @@ export async function POST(request: Request) {
       messages: [
         {
           role: 'system',
-          content: `You are an assistant that will help me find jobs within the prompted field.
-           Only share job postings based on the details I provide & the prompt selected.
-           Share different openings upon being prompted. Share only postings from this year and list when the posting was posted.
-           Here they are: ${jobsDetails}`,
+          content: `You are an assistant that helps users
+           find job boards based on specific fields and criteria. ${jobsDetails}`,
         },
         {
           role: 'user',

@@ -99,7 +99,7 @@ const JobPostingCard = () => {
             }`}
             onClick={handleDeveloperClick}
           >
-            Developer Jobs
+            Developer Job Boards
           </button>
         </div>
         <div className="flex flex-col gap-2">
@@ -115,13 +115,13 @@ const JobPostingCard = () => {
             }`}
             onClick={handleHealthcareClick}
           >
-            Healthcare Jobs
+            Healthcare Job Boards
           </button>
         </div>
       </div>
       {loading ? (
         <div className="flex justify-center items-center mt-5  flex-wrap">
-          <span className="loading loading-ring w-[200px] text-center text-primary">
+          <span className="loading loading-ring w-[200px] text-center text-[#8860D0]">
             Loading...
           </span>
         </div>
@@ -135,17 +135,17 @@ const JobPostingCard = () => {
           {jobListings.map((job, index) => (
             <div
               key={index}
-              className="card border-2 border-[#7480ff] border-3 bg-white-400 w-96 shadow-xl text-black"
+              className="card border-2 border-black border-3 bg-gray-300 w-96 shadow-xl text-black"
             >
               <figure className=" cursor-pointer">
                 <Image src={CatJob} alt="Job Image" width={400} height={400} />
               </figure>
               <div className="card-body">
-                <h2 className="card-title">Job Listing {index + 1}</h2>
+                <h2 className="card-title">Job Board {index + 1}</h2>
                 <p className="overflow-auto">{job}</p>
-                <div className="card-actions justify-end">
+                {/* <div className="card-actions justify-end">
                   <button className="btn btn-primary">Apply Now</button>
-                </div>
+                </div> */}
               </div>
             </div>
           ))}
