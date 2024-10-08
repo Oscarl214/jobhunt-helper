@@ -10,7 +10,7 @@ const JobBoardMotion = ({ children }: MotionProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, x: -1000 }}
-      animate={{ opacity: 1, x: -700 }}
+      animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 1.5 }}
     >
       {children}
