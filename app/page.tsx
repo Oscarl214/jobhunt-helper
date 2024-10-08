@@ -6,6 +6,7 @@ import SignInButton from './login/SignInButton';
 import { FaCode } from 'react-icons/fa6';
 import { FaUserDoctor } from 'react-icons/fa6';
 import JobPostingCard from './components/dashboard/jobCard';
+
 export default async function Home() {
   const session = await getServerSession(authOptions);
   if (!session) {
