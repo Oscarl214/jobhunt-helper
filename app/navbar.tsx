@@ -23,7 +23,7 @@ const NavBar = () => {
   }
 
   return (
-    <Navbar className="bg-white h-[150px]">
+    <Navbar className="bg-[#c1c8e4] h-[150px]">
       <NavbarBrand>
         <Image
           alt="Jon Hunter AI Logo"

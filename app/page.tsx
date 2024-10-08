@@ -18,7 +18,7 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-row items-start justify-around p-24 flex-wrap ">
+    <main className="flex min-h-screen  flex-row items-start justify-around p-24 flex-wrap ">
       <JobBoardMotion>
         <div className="flex justify-start items-start flex-col w-full m-2  rounded-md">
           <div className="flex flex-row gap-2 items-center justify-center">
