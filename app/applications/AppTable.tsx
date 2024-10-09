@@ -63,12 +63,11 @@ const AppTable = () => {
           <TableRow>
             <TableHead className="w-[100px]">JobTitle</TableHead>
             <TableHead>Company</TableHead>
-            <TableHead>JobTitle</TableHead>
             <TableHead>Resume</TableHead>
             <TableHead>CoverLetter</TableHead>
             <TableHead>Notes</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>CoverLetter</TableHead>
+
             <TableHead>DateApplied</TableHead>
             <TableHead>updatedAt</TableHead>
           </TableRow>
@@ -76,8 +75,9 @@ const AppTable = () => {
         <TableBody>
           {apps.map((app) => (
             <TableRow key={app.id}>
-              <TableCell className="font-medium">{app.company}</TableCell>
               <TableCell>{app.jobtitle}</TableCell>
+              <TableCell className="font-medium">{app.company}</TableCell>
+
               <TableCell>{app.resume}</TableCell>
               <TableCell>{app.coverletter}</TableCell>
               <TableCell>{app.notes}</TableCell>
