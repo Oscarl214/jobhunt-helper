@@ -74,7 +74,7 @@ const AppTable = () => {
         </TableHeader>
         <TableBody>
           {apps.map((app) => (
-            <TableRow key={app.id}>
+            <TableRow key={app.id} className="text-black">
               <TableCell>{app.jobtitle}</TableCell>
               <TableCell className="font-medium">{app.company}</TableCell>
 
