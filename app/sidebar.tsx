@@ -29,12 +29,16 @@ const SideBar = () => {
         <>
           <NavbarContent className="flex flex-col justify-around items-center">
             <NavbarItem isActive>
-              <Link href="/" className="hover:underline" aria-current="page">
+              <Link
+                href="/jobboards"
+                className="hover:underline"
+                aria-current="page"
+              >
                 <FaClipboard className="text-indigo-300 text-5xl" />
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link href="/settings" className="hover:underline">
+              <Link href="/" className="hover:underline">
                 <CiCircleList className="text-indigo-300 text-5xl" />
               </Link>
             </NavbarItem>
