@@ -36,6 +36,7 @@ export default async function Home() {
           Job Applications
         </h2>
         <AppTable />
+        <button className="btn btn-primary">Submit an Application</button>
       </div>
     </main>
   );
