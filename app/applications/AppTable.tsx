@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-
+import { motion } from 'framer-motion';
 interface Application {
   id: string;
   jobtitle: string;
@@ -57,37 +57,49 @@ const AppTable = () => {
   }, []);
   return (
     <div>
-      <Table className="bg-white rounded-md">
-        <TableCaption>A list of your recent Applications.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">JobTitle</TableHead>
-            <TableHead>Company</TableHead>
-            <TableHead>Resume</TableHead>
-            <TableHead>CoverLetter</TableHead>
-            <TableHead>Notes</TableHead>
-            <TableHead>Status</TableHead>
+      {loading ? (
+        <div className="flex justify-center h-screen  items-center">
+          <span className="loading loading-ring w-[200px] text-primary "></span>
+        </div>
+      ) : (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        >
+          <Table className="bg-white rounded-md">
+            <TableCaption>A list of your recent Applications.</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[100px]">JobTitle</TableHead>
+                <TableHead>Company</TableHead>
+                <TableHead>Resume</TableHead>
+                <TableHead>CoverLetter</TableHead>
+                <TableHead>Notes</TableHead>
+                <TableHead>Status</TableHead>
 
-            <TableHead>DateApplied</TableHead>
-            <TableHead>updatedAt</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {apps.map((app) => (
-            <TableRow key={app.id} className="text-black">
-              <TableCell>{app.jobtitle}</TableCell>
-              <TableCell className="font-medium">{app.company}</TableCell>
+                <TableHead>DateApplied</TableHead>
+                <TableHead>updatedAt</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {apps.map((app) => (
+                <TableRow key={app.id} className="text-black">
+                  <TableCell>{app.jobtitle}</TableCell>
+                  <TableCell className="font-medium">{app.company}</TableCell>
 
-              <TableCell>{app.resume}</TableCell>
-              <TableCell>{app.coverletter}</TableCell>
-              <TableCell>{app.notes}</TableCell>
-              <TableCell>{app.status}</TableCell>
-              <TableCell>{app.dateapplied}</TableCell>
-              <TableCell>{app.updatedAt}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+                  <TableCell>{app.resume}</TableCell>
+                  <TableCell>{app.coverletter}</TableCell>
+                  <TableCell>{app.notes}</TableCell>
+                  <TableCell>{app.status}</TableCell>
+                  <TableCell>{app.dateapplied}</TableCell>
+                  <TableCell>{app.updatedAt}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </motion.div>
+      )}
     </div>
   );
 };
