@@ -93,7 +93,7 @@ model Application {
   ownerId     String
   jobtitle    String
   company     String
-  dateapplied DateTime
+  dateapplied DateTime @default(now())
   status      String
   resume      String?
   coverletter String?

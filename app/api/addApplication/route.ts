@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     return new Response('Email not found in session', { status: 400 });
   }
 
-  const { jobtitle, company, dateapplied, status, resume, coverletter, notes } =
+  const { jobtitle, company, status, resume, coverletter, dateapplied, notes } =
     await request.json();
 
   try {
@@ -35,8 +35,8 @@ export async function POST(request: Request) {
       data: {
         jobtitle,
         company,
-        dateapplied,
         status,
+        dateapplied,
         resume,
         coverletter,
         notes,

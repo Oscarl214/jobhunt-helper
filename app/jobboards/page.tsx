@@ -3,6 +3,7 @@ import { FaCode } from 'react-icons/fa6';
 import { FaUserDoctor } from 'react-icons/fa6';
 import JobBoardMotion from '../components/dashboard/JobBoardMotion';
 import JobPostingCard from '../components/dashboard/jobCard';
+
 const JobBoardPage = () => {
   return (
     <div>
