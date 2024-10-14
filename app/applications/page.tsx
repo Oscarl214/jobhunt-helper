@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import AppTable from './AppTable';
 const ApplicationsPage = () => {
   return (
-    <div>
+    <div className="h-screen p-10">
       <AppTable />
     </div>
   );

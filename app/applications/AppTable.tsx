@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 interface Application {
   id: string;
@@ -38,13 +39,10 @@ const AppTable = () => {
           cache: 'no-cache',
         });
 
-        if (!response) {
-          return new Error(`HTTP error! status: ${response.status}`);
-        }
-
         const jobData = await response.json();
 
         console.log('These are the applications', jobData);
+
         setApps(jobData.applications);
       } catch (error) {
         console.error(error);
@@ -92,8 +90,12 @@ const AppTable = () => {
                   <TableCell>{app.coverletter}</TableCell>
                   <TableCell>{app.notes}</TableCell>
                   <TableCell>{app.status}</TableCell>
-                  <TableCell>{app.dateapplied}</TableCell>
-                  <TableCell>{app.updatedAt}</TableCell>
+                  <TableCell>
+                    {dayjs(app.dateapplied).format('MMMM D, YYYY')}
+                  </TableCell>
+                  <TableCell>
+                    {dayjs(app.updatedAt).format('MMMM D, YYYY')}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

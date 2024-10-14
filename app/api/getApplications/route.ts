@@ -20,7 +20,11 @@ export async function GET(request: Request) {
     const usersApps = await prisma.user.findUnique({
       where: { email },
       select: {
-        applications: true,
+        applications: {
+          orderBy: {
+            dateapplied: 'desc',
+          },
+        },
       },
     });
 

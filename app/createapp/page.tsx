@@ -11,6 +11,8 @@ import {
 } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
+import toast, { Toast } from 'react-hot-toast';
+import dayjs, { Dayjs } from 'dayjs';
 import { stat } from 'fs';
 const CreateApp = () => {
   const [jobtitle, setJobTitle] = useState('');
@@ -18,10 +20,26 @@ const CreateApp = () => {
   const [notes, setNotes] = useState('');
   const [dateapplied, setDateApplied] = useState('');
   const [status, setStatus] = useState('');
-  //look into cloudinary file componenets
 
   const submitApp = async () => {
+    if (!jobtitle) {
+      toast.error('Please Provide a job title');
+    }
+
+    if (!company) {
+      toast.error('Please Provide a job title');
+    }
+    if (!status) {
+      toast.error('Please Provide the status of your application');
+    }
+
+    if (!dateapplied || !dayjs(dateapplied, 'MMM D, YYYY').isValid()) {
+      return toast.error('Date is invalid or empty. Format: Jan, 20, 2025');
+    }
+
     try {
+      const formattedDate = dayjs(dateapplied, 'MMM D, YYYY').toISOString();
+
       let response = await fetch('/api/addApplication', {
         method: 'POST',
         headers: {
@@ -31,7 +49,7 @@ const CreateApp = () => {
           jobtitle,
           company,
           notes,
-          dateapplied,
+          dateapplied: formattedDate,
           status,
         }),
       });
