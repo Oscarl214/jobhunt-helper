@@ -5,6 +5,9 @@ import NavBar from './navbar';
 import AuthProvider from './auth/Provider';
 import SideBar from './sidebar';
 import { Toaster } from 'react-hot-toast';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../app/api/auth/[...nextauth]/route';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -12,17 +15,18 @@ export const metadata: Metadata = {
   description: 'A full stack app that helps get jobs',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="en" suppressHydrationWarning>
-      <AuthProvider>
+      <AuthProvider session={session}>
         <body className={inter.className}>
           <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
-          <NavBar />
           <SideBar />
           {children}
         </body>

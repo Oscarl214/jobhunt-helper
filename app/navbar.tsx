@@ -27,8 +27,6 @@ const NavBar = () => {
       <NavbarBrand>
         <Image
           alt="Jon Hunter AI Logo"
-          // height={100}
-          // width={150}
           className="h-10 w-auto"
           src={Logo.src}
         />

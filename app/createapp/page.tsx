@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import toast, { Toast } from 'react-hot-toast';
 import dayjs, { Dayjs } from 'dayjs';
-import { stat } from 'fs';
+
 const CreateApp = () => {
   const [jobtitle, setJobTitle] = useState('');
   const [company, setCompany] = useState('');
