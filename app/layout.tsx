@@ -28,7 +28,7 @@ export default async function RootLayout({
         <body className={inter.className}>
           <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
           <SideBar />
-          {children}
+          <div className="pl-[20rem] ">{children}</div>
         </body>
       </AuthProvider>
     </html>

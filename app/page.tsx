@@ -18,9 +18,9 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex min-h-screen  flex-row items-start justify-around p-24 flex-wrap ">
-      <div className="flex flex-col gap-4 justify-center">
-        <h2 className=" m-2 text-black font-bold text-lg lg:text-5xl text-center">
+    <main className="flex min-h-screen  flex-row items-start justify-around flex-wrap ">
+      <div className="flex flex-col gap-4 justify-center p-24">
+        <h2 className=" m-4 text-black font-bold text-lg lg:text-5xl text-center">
           Job Applications
         </h2>
         <ServerApps />

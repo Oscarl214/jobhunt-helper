@@ -42,7 +42,7 @@ const SideBar = () => {
   }
   return (
     <Navbar className="bg-[rgb(0,31,63)] fixed top-0 left-0 h-full w-[250px] ">
-      <div className="flex flex-col justify-around gap-[10rem]">
+      <div className="flex flex-col justify-around lg:gap-[15rem]">
         {status === 'authenticated' ? (
           <>
             <div className="p-4">

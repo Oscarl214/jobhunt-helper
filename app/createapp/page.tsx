@@ -72,8 +72,12 @@ const CreateApp = () => {
 
   return (
     <div className="p-24 h-screen">
+      <h2 className=" mb-4 text-black font-bold text-lg lg:text-5xl text-center">
+        Log your most recent Application
+      </h2>
+
       <Table className="bg-white rounded-md">
-        <TableCaption>Create and Application</TableCaption>
+        <TableCaption>Create an Application</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[10%]">JobTitle</TableHead>

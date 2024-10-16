@@ -7,7 +7,7 @@ import JobPostingCard from '../components/dashboard/jobCard';
 const JobBoardPage = () => {
   return (
     <div>
-      <div className="flex min-h-screen  flex-row items-start justify-start p-24 flex-wrap ">
+      <div className="flex min-h-screen  flex-row items-start  ">
         <JobBoardMotion>
           <div className="flex justify-between items-start flex-col w-full m-2  rounded-md">
             <div className="flex flex-row gap-2 items-center justify-between">
