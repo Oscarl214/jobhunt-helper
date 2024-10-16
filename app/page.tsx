@@ -5,6 +5,7 @@ import Link from 'next/link';
 import SignInButton from './login/SignInButton';
 
 import AppTable from './applications/AppTable';
+import ServerApps from './applications/serverApp';
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
@@ -22,7 +23,7 @@ export default async function Home() {
         <h2 className=" m-2 text-black font-bold text-lg lg:text-5xl text-center">
           Job Applications
         </h2>
-        <AppTable />
+        <ServerApps />
         <Link className="btn btn-primary" href={'/createapp'}>
           Log an Application
         </Link>

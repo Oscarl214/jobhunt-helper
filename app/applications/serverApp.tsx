@@ -8,34 +8,27 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { headers } from 'next/headers';
-import { getServerSession } from 'next-auth';
 import dayjs from 'dayjs';
 import { fetchApplications } from '../lib/functions';
 
-import { authOptions } from '../../app/api/auth/[...nextauth]/route';
 interface Application {
-  id: string;
+  id: number;
   jobtitle: string;
   company: string;
   status: string;
   resume: string | null;
-  dateapplied: string;
+  dateapplied: Date;
   coverletter: string | null;
-  notes: string;
-  createdAt: string;
-  updatedAt: string;
+  notes: string | null;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const ServerApps = async () => {
-  const session = await getServerSession(authOptions);
+  const applications = await fetchApplications();
 
-  console.log('Front end session', session);
-  const data = await fetchApplications(session);
-
-  const applications = data?.applications || [];
   return (
-    <div>
+    <div className="">
       <Table className="bg-white rounded-md">
         <TableCaption>A list of your recent Applications.</TableCaption>
         <TableHeader>

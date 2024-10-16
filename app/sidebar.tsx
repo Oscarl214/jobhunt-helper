@@ -42,16 +42,9 @@ const SideBar = () => {
   }
   return (
     <Navbar className="bg-[rgb(0,31,63)] fixed top-0 left-0 h-full w-[250px] ">
-      <div className="flex flex-col justify-evenly">
+      <div className="flex flex-col justify-around gap-[10rem]">
         {status === 'authenticated' ? (
           <>
-            <div className="flex flex-col justify-start items-start ">
-              <Image
-                src={logo.src}
-                alt="User Picture"
-                className=" text-center w-[350px] h-[100px]"
-              />
-            </div>
             <div className="p-4">
               <NavbarContent
                 justify="start"
@@ -59,11 +52,9 @@ const SideBar = () => {
               >
                 <NavbarItem>
                   <Image
-                    height={50}
-                    width={50}
                     src={session.user.image || '/path/to/default/image.png'}
                     alt="User Picture"
-                    className="rounded-md text-center"
+                    className="rounded-md text-center "
                   />
                 </NavbarItem>
                 <NavbarItem>
@@ -72,6 +63,13 @@ const SideBar = () => {
                   </p>
                 </NavbarItem>
               </NavbarContent>
+              <div className="flex flex-col justify-start items-start ">
+                <Image
+                  src={logo.src}
+                  alt="User Picture"
+                  className=" text-center w-[350px] h-[100px]"
+                />
+              </div>
             </div>
 
             <div className="flex-grow flex flex-col items-center justify-center">
