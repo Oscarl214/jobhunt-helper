@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
   Table,
@@ -10,7 +11,7 @@ import {
 } from '@/components/ui/table';
 import dayjs from 'dayjs';
 import { fetchApplications } from '../lib/functions';
-
+import { useQuery } from '@tanstack/react-query';
 interface Application {
   id: number;
   jobtitle: string;
@@ -24,8 +25,24 @@ interface Application {
   updatedAt: Date;
 }
 
-const ServerApps = async () => {
-  const applications = await fetchApplications();
+const ServerApps = () => {
+  const {
+    data: applications,
+    isPending,
+    error,
+  } = useQuery({
+    queryKey: ['appsData'],
+    queryFn: () => fetchApplications(),
+  });
+
+  console.log(applications);
+  if (isPending) {
+    return 'Applications are Loading';
+  }
+
+  if (error) {
+    return 'Failed to fetch applications';
+  }
 
   return (
     <div className="">
@@ -45,7 +62,7 @@ const ServerApps = async () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {applications.map((app: Application) => (
+          {applications?.map((app: Application) => (
             <TableRow key={app.id} className="text-black">
               <TableCell>{app.jobtitle}</TableCell>
               <TableCell className="font-medium">{app.company}</TableCell>

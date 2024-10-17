@@ -23,6 +23,8 @@ export const fetchApplications = async () => {
         },
       },
     });
+
+    console.log(usersApps?.applications);
     return usersApps?.applications || [];
   } catch (error) {
     console.error('Error fetching users applications:', error);

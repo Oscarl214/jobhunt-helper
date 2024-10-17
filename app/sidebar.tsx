@@ -27,7 +27,7 @@ const SideBar = () => {
   if (!session || !session.user) {
     return (
       <div>
-        <Navbar className="bg-[rgb(0,31,63)] fixed top-0 left-0 h-full w-[250px] ">
+        <Navbar className="bg-[rgb(0,31,63)] fixed top-0 left-0 h-full w-[280px] ">
           {' '}
           <div className="flex flex-col justify-start items-start ">
             <Image
@@ -41,7 +41,7 @@ const SideBar = () => {
     );
   }
   return (
-    <Navbar className="bg-[rgb(0,31,63)] fixed top-0 left-0 h-full w-[250px] ">
+    <Navbar className="bg-[rgb(0,31,63)] fixed top-0 left-0 h-full w-[280px] ">
       <div className="flex flex-col justify-around lg:gap-[15rem]">
         {status === 'authenticated' ? (
           <>
