@@ -13,9 +13,9 @@ import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import toast, { Toast } from 'react-hot-toast';
 import dayjs, { Dayjs } from 'dayjs';
-import { useQueryClient } from '@tanstack/react-query';
+import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { useMutation } from '@tanstack/react-query';
-import { addApplication } from '../lib/functions';
+import { addApplication, deleteApplication } from '../lib/functions';
 
 import ServerApps from '../applications/serverApp';
 const CreateApp = () => {
@@ -183,7 +183,7 @@ const CreateApp = () => {
         Submit Application
       </button>
 
-      <div>
+      <div className="mt-10">
         <ServerApps />
       </div>
     </div>

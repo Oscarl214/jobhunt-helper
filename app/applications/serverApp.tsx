@@ -9,8 +9,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import toast, { Toast } from 'react-hot-toast';
+import { FaRegTrashCan } from 'react-icons/fa6';
 import dayjs from 'dayjs';
-import { fetchApplications } from '../lib/functions';
+import { useMutation } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
+import { fetchApplications, deleteApplication } from '../lib/functions';
 import { useQuery } from '@tanstack/react-query';
 interface Application {
   id: number;
@@ -26,6 +30,8 @@ interface Application {
 }
 
 const ServerApps = () => {
+  const queryClient = useQueryClient();
+
   const {
     data: applications,
     isPending,
@@ -33,6 +39,14 @@ const ServerApps = () => {
   } = useQuery({
     queryKey: ['appsData'],
     queryFn: () => fetchApplications(),
+  });
+
+  const { mutateAsync: deleteApplicationMutation } = useMutation({
+    mutationFn: deleteApplication,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['appsData'] });
+      toast.success('Successfully Deleted Application');
+    },
   });
 
   if (isPending) {
@@ -81,6 +95,20 @@ const ServerApps = () => {
               </TableCell>
               <TableCell>
                 {dayjs(app.updatedAt).format('MMMM D, YYYY')}
+              </TableCell>
+              <TableCell>
+                <FaRegTrashCan
+                  className="hover:text-red-500"
+                  onClick={async () => {
+                    try {
+                      await deleteApplicationMutation({
+                        appID: app.id.toString(),
+                      });
+                    } catch (e) {
+                      toast.error('Failed to delete the App');
+                    }
+                  }}
+                />
               </TableCell>
             </TableRow>
           ))}

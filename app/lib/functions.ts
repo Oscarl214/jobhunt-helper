@@ -3,6 +3,7 @@
 import { getServerSession } from 'next-auth';
 import prisma from '@/lib/prisma';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { user } from '@nextui-org/react';
 
 export const fetchApplications = async () => {
   const session = await getServerSession(authOptions);
@@ -90,5 +91,50 @@ export const addApplication = async ({
   } catch (error) {
     console.error('Error processing request:', error);
     return new Response('Error processing request', { status: 500 });
+  }
+};
+
+export const deleteApplication = async ({ appID }: { appID: string }) => {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session.user) {
+    return new Response('User is not logged in', { status: 401 });
+  }
+  const { email } = session.user;
+
+  if (!email) {
+    return new Response('Email not found in session', { status: 400 });
+  }
+
+  try {
+    const usersApp = await prisma.user.findUnique({
+      where: { email },
+      select: {
+        applications: true,
+        id: true,
+      },
+    });
+
+    if (!usersApp) {
+      return new Response('User not found', { status: 404 });
+    }
+
+    const application = usersApp.applications.find(
+      (app) => app.id === parseInt(appID)
+    );
+
+    if (!application) {
+      return new Response('Application not found', { status: 404 });
+    }
+
+    const deletedApplication = await prisma.application.delete({
+      where: { id: application.id },
+    });
+
+    console.log('This app has been deleted', deleteApplication);
+    return deletedApplication;
+  } catch (error) {
+    console.error('Error retrieving application:', error);
+    return new Response('Error retrieving application', { status: 500 });
   }
 };
