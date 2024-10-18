@@ -35,7 +35,6 @@ const ServerApps = () => {
     queryFn: () => fetchApplications(),
   });
 
-  console.log(applications);
   if (isPending) {
     return 'Applications are Loading';
   }
