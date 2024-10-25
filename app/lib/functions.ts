@@ -139,4 +139,6 @@ export const deleteApplication = async ({ appID }: { appID: string }) => {
   }
 };
 
-//Created a function that lets user update the application
+// Need to Create a function that lets user update the application
+
+export const updateApplication = async ({ appID }: { appID: string }) => {};
