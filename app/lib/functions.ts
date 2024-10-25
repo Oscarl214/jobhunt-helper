@@ -138,3 +138,5 @@ export const deleteApplication = async ({ appID }: { appID: string }) => {
     return new Response('Error retrieving application', { status: 500 });
   }
 };
+
+//Created a function that lets user update the application
