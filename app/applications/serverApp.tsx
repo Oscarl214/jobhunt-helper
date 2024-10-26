@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Table,
   TableBody,
@@ -16,6 +16,8 @@ import { useMutation } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { fetchApplications, deleteApplication } from '../lib/functions';
 import { useQuery } from '@tanstack/react-query';
+import { FaRegEdit } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 interface Application {
   id: number;
   jobtitle: string;
@@ -31,6 +33,10 @@ interface Application {
 
 const ServerApps = () => {
   const queryClient = useQueryClient();
+
+  const router = useRouter();
+
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
   const {
     data: applications,
@@ -74,6 +80,7 @@ const ServerApps = () => {
             <TableHead>updatedAt</TableHead>
           </TableRow>
         </TableHeader>
+
         <TableBody>
           {applications?.map((app: Application) => (
             <TableRow key={app.id} className="text-black">
@@ -95,6 +102,11 @@ const ServerApps = () => {
               </TableCell>
               <TableCell>
                 {dayjs(app.updatedAt).format('MMMM D, YYYY')}
+              </TableCell>
+              <TableCell>
+                <FaRegEdit
+                  onClick={() => router.push(`/updateapp/${app.id}`)}
+                />
               </TableCell>
               <TableCell>
                 <FaRegTrashCan

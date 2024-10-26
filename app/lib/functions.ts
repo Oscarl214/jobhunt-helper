@@ -32,6 +32,32 @@ export const fetchApplications = async () => {
   }
 };
 
+export const fetchApplication = async ({ appId }: { appId: number }) => {
+  const session = await getServerSession(authOptions);
+  const email = session?.user?.email;
+
+  if (!email) {
+    throw new Error('Email not found in session');
+  }
+
+  try {
+    const singleApplication = prisma.application.findUnique({
+      where: { id: appId },
+      select: {
+        notes: true,
+        company: true,
+        dateapplied: true,
+        jobtitle: true,
+        status: true,
+      },
+    });
+
+    return singleApplication;
+  } catch (error) {
+    console.error('Error processing request:', error);
+    return new Response('Error processing request', { status: 500 });
+  }
+};
 export const addApplication = async ({
   jobtitle,
   company,
@@ -141,4 +167,73 @@ export const deleteApplication = async ({ appID }: { appID: string }) => {
 
 // Need to Create a function that lets user update the application
 
-export const updateApplication = async ({ appID }: { appID: string }) => {};
+export const updateApplication = async ({
+  appID,
+  jobtitle,
+  company,
+  status,
+  // resume,
+  // coverletter,
+  dateapplied,
+  notes,
+}: {
+  appID: string;
+  jobtitle: string;
+  company: string;
+  status: string;
+  // resume: string;
+  // coverletter: string;
+  dateapplied: string;
+  notes: string;
+}) => {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session.user) {
+    return new Response('User is not logged in', { status: 401 });
+  }
+
+  const { email } = session.user;
+
+  if (!email) {
+    return new Response('Email not found in session', { status: 400 });
+  }
+
+  try {
+    const usersApp = await prisma.user.findUnique({
+      where: { email },
+      select: {
+        applications: true,
+        id: true,
+      },
+    });
+
+    if (!usersApp) {
+      return new Response('User not found', { status: 404 });
+    }
+
+    const application = usersApp.applications.find(
+      (app) => app.id === parseInt(appID)
+    );
+
+    if (!application) {
+      return new Response('Application not found', { status: 404 });
+    }
+    const dateAppliedAsDate = new Date(dateapplied);
+
+    const updatedApplication = await prisma.application.update({
+      where: { id: application.id },
+      data: {
+        jobtitle,
+        company,
+        status,
+        dateapplied: dateAppliedAsDate,
+        notes,
+      },
+    });
+
+    return updatedApplication;
+  } catch (error) {
+    console.error('Error processing request:', error);
+    return new Response('Error processing request', { status: 500 });
+  }
+};

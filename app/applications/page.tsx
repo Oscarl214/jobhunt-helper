@@ -5,7 +5,6 @@ import ServerApps from './serverApp';
 const ApplicationsPage = () => {
   return (
     <div className="flex min-h-screen  flex-row items-start justify-around p-24 flex-wrap">
-      {/* <AppTable /> */}
       <ServerApps />
     </div>
   );
