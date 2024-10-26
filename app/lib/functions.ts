@@ -55,7 +55,7 @@ export const fetchApplication = async ({ appId }: { appId: number }) => {
     return singleApplication;
   } catch (error) {
     console.error('Error processing request:', error);
-    return new Response('Error processing request', { status: 500 });
+    return null;
   }
 };
 export const addApplication = async ({
