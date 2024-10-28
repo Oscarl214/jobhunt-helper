@@ -30,7 +30,7 @@ export default async function RootLayout({
           <AuthProvider session={session}>
             <Toaster position="top-center" toastOptions={{ duration: 3000 }} />
             <SideBar />
-            <div className="pl-[20rem] ">{children}</div>
+            <div className="pl-[20rem] overflow-x-hidden">{children}</div>
           </AuthProvider>
         </QueryProvider>
       </body>

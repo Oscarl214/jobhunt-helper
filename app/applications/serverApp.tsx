@@ -100,20 +100,22 @@ const ServerApps = () => {
                     {app.link ? app.link : 'Link not provided'}
                   </a>
                 </TableCell>
-                <TableCell>
+                <TableCell className="max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
                   <a
                     href={app.resume || undefined}
                     target="_blank"
                     rel="noopener noreferrer"
+                    title="Resume"
                   >
                     {app.resume ? app.resume : 'No resume available'}
                   </a>
                 </TableCell>
-                <TableCell>
+                <TableCell className="max-w-xs overflow-hidden text-ellipsis whitespace-nowrap">
                   <a
                     href={app.coverletter || undefined}
                     target="_blank"
                     rel="noopener noreferrer"
+                    title="Cover Letter"
                   >
                     {app.coverletter
                       ? app.coverletter
@@ -130,11 +132,14 @@ const ServerApps = () => {
                 </TableCell>
                 <TableCell>
                   <FaRegEdit
+                    title="Update Application"
+                    className="cursor-pointer hover:text-green-500"
                     onClick={() => router.push(`/updateapp/${app.id}`)}
                   />
                 </TableCell>
                 <TableCell className="text-cen">
                   <FaRegTrashCan
+                    title="Delete Application"
                     className="hover:text-red-500 text-center"
                     onClick={async () => {
                       try {

@@ -47,6 +47,9 @@ export const fetchApplication = async ({ appId }: { appId: number }) => {
         notes: true,
         company: true,
         dateapplied: true,
+        updatedAt: true,
+        coverletter: true,
+        resume: true,
         jobtitle: true,
         status: true,
         link: true,
@@ -177,9 +180,9 @@ export const updateApplication = async ({
   company,
   link,
   status,
-  // resume,
-  // coverletter,
-  dateapplied,
+  resume,
+  coverletter,
+  // dateapplied,
   notes,
 }: {
   appID: string;
@@ -187,9 +190,9 @@ export const updateApplication = async ({
   company: string;
   link: string;
   status: string;
-  // resume: string;
-  // coverletter: string;
-  dateapplied: string;
+  resume: string;
+  coverletter: string;
+  // dateapplied: string;
   notes: string;
 }) => {
   const session = await getServerSession(authOptions);
@@ -224,7 +227,7 @@ export const updateApplication = async ({
     if (!application) {
       return new Response('Application not found', { status: 404 });
     }
-    const dateAppliedAsDate = new Date(dateapplied);
+    // const dateAppliedAsDate = new Date(dateapplied);
 
     const updatedApplication = await prisma.application.update({
       where: { id: application.id },
@@ -232,8 +235,10 @@ export const updateApplication = async ({
         jobtitle,
         link,
         company,
+        coverletter,
+        resume,
         status,
-        dateapplied: dateAppliedAsDate,
+        // dateapplied: dateAppliedAsDate,
         notes,
       },
     });
