@@ -13,10 +13,11 @@ import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import toast, { Toast } from 'react-hot-toast';
 import dayjs, { Dayjs } from 'dayjs';
+import UploadCLWidget from '../components/uploadCLwidget';
 import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { useMutation } from '@tanstack/react-query';
 import { addApplication, deleteApplication } from '../lib/functions';
-
+import UploadWidget from '../components/uploadwidget';
 import ServerApps from '../applications/serverApp';
 const CreateApp = () => {
   const [jobtitle, setJobTitle] = useState('');
@@ -24,56 +25,24 @@ const CreateApp = () => {
   const [notes, setNotes] = useState('');
   const [dateapplied, setDateApplied] = useState('');
   const [status, setStatus] = useState('');
+  const [link, setLink] = useState('');
+  const [resume, setResume] = useState('');
+  const [cover, setCover] = useState('');
+  const [isOptionsVisible, setOptionsVisible] = useState(true);
+  const [iswidgetVisible, setWidgetVisible] = useState(true);
+  const [isclwidgetVisible, setCLWidgetVisible] = useState(true);
 
-  // const submitApp = async () => {
-  //   if (!jobtitle) {
-  //     toast.error('Please Provide a job title');
-  //   }
+  const toggleOptions = () => {
+    setOptionsVisible((prevState) => !prevState);
+  };
 
-  //   if (!company) {
-  //     toast.error('Please Provide a job title');
-  //   }
-  //   if (!status) {
-  //     toast.error('Please Provide the status of your application');
-  //   }
+  const toggleWidget = () => {
+    setWidgetVisible((prevState) => !prevState);
+  };
 
-  //   if (!dateapplied || !dayjs(dateapplied, 'MMM D, YYYY').isValid()) {
-  //     return toast.error('Date is invalid or empty. Format: Jan, 20, 2025');
-  //   }
-
-  //   try {
-  //     const formattedDate = dayjs(dateapplied, 'MMM D, YYYY').toISOString();
-
-  //     let response = await fetch('/api/addApplication', {
-  //       method: 'POST',
-  //       headers: {
-  //         'content-type': 'application/json',
-  //       },
-  //       body: JSON.stringify({
-  //         jobtitle,
-  //         company,
-  //         notes,
-  //         dateapplied: formattedDate,
-  //         status,
-  //       }),
-  //     });
-
-  //     if (response.ok) {
-  //       const result = await response.json();
-  //       console.log('Sucessfully created an Appliication', result);
-  //       setJobTitle('');
-  //       setCompany('');
-  //       setNotes('');
-  //       setDateApplied('');
-  //       setStatus('');
-  //     } else {
-  //       console.error('Failed to add application');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error submitting application:', error);
-  //   }
-  // };
-
+  const toggleCLWidget = () => {
+    setCLWidgetVisible((prevState) => !prevState);
+  };
   const queryClient = useQueryClient();
 
   const { mutateAsync: addApplicationMutation } = useMutation({
@@ -95,6 +64,7 @@ const CreateApp = () => {
           <TableRow>
             <TableHead className="w-[10%]">JobTitle</TableHead>
             <TableHead className="w-[10%]">Company</TableHead>
+            <TableHead className="w-[10%]">Application Link</TableHead>
             <TableHead className="w-[10%]">Resume</TableHead>
             <TableHead className="w-[10%]">CoverLetter</TableHead>
             <TableHead className="w-[10%]">Notes</TableHead>
@@ -121,16 +91,47 @@ const CreateApp = () => {
                 onChange={(e) => setCompany(e.target.value)}
               />
             </TableCell>
-
+            <TableCell className="font-medium">
+              {' '}
+              <Input
+                type="text"
+                placeholder="www.amazonCareers.com.."
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+              />
+            </TableCell>
             <TableCell>
-              <Input type="text" placeholder="Resume" />
+              {!iswidgetVisible ? (
+                <Input
+                  type="text"
+                  placeholder="Resume"
+                  value={resume}
+                  onClick={toggleWidget}
+                />
+              ) : (
+                <UploadWidget
+                  setResume={setResume}
+                  setWidgetVisible={setWidgetVisible}
+                />
+              )}
             </TableCell>
             <TableCell>
               {' '}
-              <Input type="text" placeholder="CoverLetter" />
+              {!isclwidgetVisible ? (
+                <Input
+                  type="text"
+                  placeholder="CoverLetter"
+                  value={cover}
+                  onClick={toggleCLWidget}
+                />
+              ) : (
+                <UploadCLWidget
+                  setCover={setCover}
+                  setCLWidgetVisible={setCLWidgetVisible}
+                />
+              )}
             </TableCell>
             <TableCell>
-              {' '}
               <Input
                 type="text"
                 placeholder="Recruiter is.."
@@ -148,13 +149,31 @@ const CreateApp = () => {
               />
             </TableCell>
             <TableCell>
-              {' '}
-              <Input
-                type="text"
-                placeholder="applied"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-              />
+              <>
+                {!isOptionsVisible ? (
+                  <Input
+                    type="text"
+                    placeholder="applied"
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                    onClick={toggleOptions}
+                  />
+                ) : (
+                  <select
+                    className="select select-primary bg-white w-full max-w-xs"
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                  >
+                    <option disabled value="">
+                      Select application status
+                    </option>
+                    <option value="applied">Applied</option>
+                    <option value="interview">Interview</option>
+                    <option value="offered">Offered</option>
+                    <option value="rejected">Rejected</option>
+                  </select>
+                )}
+              </>
             </TableCell>
           </TableRow>
         </TableBody>
@@ -167,14 +186,23 @@ const CreateApp = () => {
               jobtitle,
               status,
               company,
+              link,
               notes,
+              coverletter: cover,
+              resume,
               dateapplied,
             });
+            setJobTitle('');
             setCompany('');
             setDateApplied('');
             setNotes('');
             setStatus('');
             setCompany('');
+            setResume('');
+            setLink('');
+            setCover('');
+            setWidgetVisible(true);
+            setCLWidgetVisible(true);
           } catch (e) {
             toast.error('Failed to add Application');
           }

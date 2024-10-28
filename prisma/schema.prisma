@@ -98,6 +98,7 @@ model Application {
   resume      String?
   coverletter String?
   notes       String?
+  link        String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

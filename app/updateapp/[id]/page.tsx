@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
-import { fetchApplication } from '@/app/lib/functions';
+import { toast } from 'react-hot-toast';
+import { fetchApplication, updateApplication } from '@/app/lib/functions';
 import dayjs from 'dayjs';
 import {
   Table,
@@ -15,25 +16,45 @@ import {
 } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
 import ServerApps from '@/app/applications/serverApp';
+import { QueryClient, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
 const UpdateApp = () => {
   const [jobtitle, setJobTitle] = useState('');
   const [company, setCompany] = useState('');
   const [notes, setNotes] = useState('');
   const [dateapplied, setDateApplied] = useState('');
   const [status, setStatus] = useState('');
-  const { id } = useParams();
 
-  console.log('params', id);
+  const [isOptionsVisible, setOptionsVisible] = useState(true);
+
+  const toggleOptions = () => {
+    setOptionsVisible((prevState) => !prevState);
+  };
+
+  const { id } = useParams();
+  const appID = Array.isArray(id) ? id[0] : id;
+
+  const queryClient = useQueryClient();
+
+  const router = useRouter();
 
   const {
     data: application,
     isPending,
     error,
   } = useQuery({
-    queryKey: ['applicationData', id],
+    queryKey: ['applicationData', appID],
     queryFn: () => {
       const appId = Array.isArray(id) ? parseInt(id[0], 10) : parseInt(id, 10);
       return fetchApplication({ appId });
+    },
+  });
+
+  const { mutateAsync: newApplication } = useMutation({
+    mutationFn: updateApplication,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['appsData'] });
     },
   });
 
@@ -52,24 +73,40 @@ const UpdateApp = () => {
         </h2>
 
         <Table className="bg-white rounded-md">
-          <TableCaption>Create an Application</TableCaption>
+          <TableCaption>Update an Application</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="w-[10%]">
-                JobTitle: {application.jobtitle}
+                JobTitle:{' '}
+                <span className="font-bold text-black">
+                  {application.jobtitle}
+                </span>
               </TableHead>
               <TableHead className="w-[10%]">
-                Company: {application.company}
+                Company:{' '}
+                <span className="font-bold text-black">
+                  {application.company}
+                </span>
               </TableHead>
               <TableHead className="w-[10%]">Resume</TableHead>
               <TableHead className="w-[10%]">CoverLetter</TableHead>
-              <TableHead className="w-[10%]">Notes</TableHead>
               <TableHead className="w-[10%]">
-                DateApplied:{' '}
-                {dayjs(application.dateapplied).format('MMMM D, YYYY')}
+                Notes:{' '}
+                <span className="font-bold text-black">
+                  {application.notes}
+                </span>{' '}
               </TableHead>
               <TableHead className="w-[10%]">
-                Status: {application.status}
+                DateApplied:{' '}
+                <span className="font-bold text-black">
+                  {dayjs(application.dateapplied).format('MMMM D, YYYY')}
+                </span>
+              </TableHead>
+              <TableHead className="w-[10%]">
+                Status:{' '}
+                <span className="font-bold text-black">
+                  {application.status}
+                </span>
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -119,20 +156,67 @@ const UpdateApp = () => {
                 />
               </TableCell>
               <TableCell>
-                {' '}
-                <Input
-                  type="text"
-                  placeholder="applied"
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value)}
-                />
+                <>
+                  {!isOptionsVisible ? (
+                    <Input
+                      type="text"
+                      placeholder="applied"
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}
+                      onClick={toggleOptions}
+                    />
+                  ) : (
+                    <select
+                      className="select select-primary bg-white w-full max-w-xs"
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}
+                    >
+                      <option disabled value="">
+                        Select application status
+                      </option>
+                      <option value="applied">Applied</option>
+                      <option value="interview">Interview</option>
+                      <option value="offered">Offered</option>
+                      <option value="rejected">Rejected</option>
+                    </select>
+                  )}
+                </>
               </TableCell>
             </TableRow>
           </TableBody>
         </Table>
-        <button className="btn btn-primary">Update Application</button>
-
-        <div className="mt-10">{/* <ServerApps /> */}</div>
+        <button
+          className="btn bg-green-400 text-black hover:bg-primary"
+          onClick={async () => {
+            try {
+              await updateApplication({
+                jobtitle,
+                status,
+                company,
+                notes,
+                dateapplied,
+                appID,
+              });
+              setCompany('');
+              setDateApplied('');
+              setNotes('');
+              setStatus('');
+              setCompany('');
+              toast.success('Successfully updated Application');
+              router.push('/');
+            } catch (e) {
+              toast.error('Failed to update Application');
+            }
+          }}
+        >
+          Update Application
+        </button>
+        <button
+          className="btn btn-primary ml-4"
+          onClick={() => router.push('/')}
+        >
+          Back to Applications
+        </button>
       </div>
     </div>
   );

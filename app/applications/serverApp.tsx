@@ -22,6 +22,7 @@ interface Application {
   id: number;
   jobtitle: string;
   company: string;
+  link: string | null;
   status: string;
   resume: string | null;
   dateapplied: Date;
@@ -71,6 +72,7 @@ const ServerApps = () => {
           <TableRow>
             <TableHead className="w-[100px]">JobTitle</TableHead>
             <TableHead>Company</TableHead>
+            <TableHead>Application Link</TableHead>
             <TableHead>Resume</TableHead>
             <TableHead>CoverLetter</TableHead>
             <TableHead>Notes</TableHead>
@@ -78,52 +80,76 @@ const ServerApps = () => {
 
             <TableHead>DateApplied</TableHead>
             <TableHead>updatedAt</TableHead>
+            <TableHead>Update App</TableHead>
+            <TableHead>Delete App</TableHead>
           </TableRow>
         </TableHeader>
 
         <TableBody>
-          {applications?.map((app: Application) => (
-            <TableRow key={app.id} className="text-black">
-              <TableCell>{app.jobtitle}</TableCell>
-              <TableCell className="font-medium">{app.company}</TableCell>
-
-              <TableCell>
-                {app.resume ? app.resume : 'No resume available'}
-              </TableCell>
-              <TableCell>
-                {app.coverletter
-                  ? app.coverletter
-                  : 'No Cover Letter available'}
-              </TableCell>
-              <TableCell>{app.notes}</TableCell>
-              <TableCell>{app.status}</TableCell>
-              <TableCell>
-                {dayjs(app.dateapplied).format('MMMM D, YYYY')}
-              </TableCell>
-              <TableCell>
-                {dayjs(app.updatedAt).format('MMMM D, YYYY')}
-              </TableCell>
-              <TableCell>
-                <FaRegEdit
-                  onClick={() => router.push(`/updateapp/${app.id}`)}
-                />
-              </TableCell>
-              <TableCell>
-                <FaRegTrashCan
-                  className="hover:text-red-500"
-                  onClick={async () => {
-                    try {
-                      await deleteApplicationMutation({
-                        appID: app.id.toString(),
-                      });
-                    } catch (e) {
-                      toast.error('Failed to delete the App');
-                    }
-                  }}
-                />
-              </TableCell>
-            </TableRow>
-          ))}
+          {applications.length === 0 ? (
+            <TableCaption className="flex justify-center items-center text-black font-bold">
+              Please Log your first Application!
+            </TableCaption>
+          ) : (
+            applications?.map((app: Application) => (
+              <TableRow key={app.id} className="text-black">
+                <TableCell>{app.jobtitle}</TableCell>
+                <TableCell className="font-medium">{app.company}</TableCell>
+                <TableCell className="font-medium cursor-pointer">
+                  <a href={app.link || undefined} target="_blank">
+                    {app.link ? app.link : 'Link not provided'}
+                  </a>
+                </TableCell>
+                <TableCell>
+                  <a
+                    href={app.resume || undefined}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {app.resume ? app.resume : 'No resume available'}
+                  </a>
+                </TableCell>
+                <TableCell>
+                  <a
+                    href={app.coverletter || undefined}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {app.coverletter
+                      ? app.coverletter
+                      : 'No Cover Letter available'}
+                  </a>
+                </TableCell>
+                <TableCell className="overflow-auto">{app.notes}</TableCell>
+                <TableCell>{app.status}</TableCell>
+                <TableCell>
+                  {dayjs(app.dateapplied).format('MMMM D, YYYY')}
+                </TableCell>
+                <TableCell>
+                  {dayjs(app.updatedAt).format('MMMM D, YYYY')}
+                </TableCell>
+                <TableCell>
+                  <FaRegEdit
+                    onClick={() => router.push(`/updateapp/${app.id}`)}
+                  />
+                </TableCell>
+                <TableCell className="text-cen">
+                  <FaRegTrashCan
+                    className="hover:text-red-500 text-center"
+                    onClick={async () => {
+                      try {
+                        await deleteApplicationMutation({
+                          appID: app.id.toString(),
+                        });
+                      } catch (e) {
+                        toast.error('Failed to delete the App');
+                      }
+                    }}
+                  />
+                </TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
     </div>

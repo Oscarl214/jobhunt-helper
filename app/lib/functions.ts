@@ -49,6 +49,7 @@ export const fetchApplication = async ({ appId }: { appId: number }) => {
         dateapplied: true,
         jobtitle: true,
         status: true,
+        link: true,
       },
     });
 
@@ -62,16 +63,18 @@ export const addApplication = async ({
   jobtitle,
   company,
   status,
-  // resume,
-  // coverletter,
+  link,
+  resume,
+  coverletter,
   dateapplied,
   notes,
 }: {
   jobtitle: string;
   company: string;
   status: string;
-  // resume: string;
-  // coverletter: string;
+  link: string;
+  resume: string;
+  coverletter: string;
   dateapplied: string;
   notes: string;
 }) => {
@@ -105,9 +108,10 @@ export const addApplication = async ({
         jobtitle,
         company,
         status,
+        link,
         dateapplied: dateAppliedAsDate,
-        // resume,
-        // coverletter,
+        resume,
+        coverletter,
         notes,
         ownerId: userId,
       },
@@ -171,6 +175,7 @@ export const updateApplication = async ({
   appID,
   jobtitle,
   company,
+  link,
   status,
   // resume,
   // coverletter,
@@ -180,6 +185,7 @@ export const updateApplication = async ({
   appID: string;
   jobtitle: string;
   company: string;
+  link: string;
   status: string;
   // resume: string;
   // coverletter: string;
@@ -224,6 +230,7 @@ export const updateApplication = async ({
       where: { id: application.id },
       data: {
         jobtitle,
+        link,
         company,
         status,
         dateapplied: dateAppliedAsDate,
