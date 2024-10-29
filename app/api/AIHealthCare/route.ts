@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../auth/[...nextauth]/route';
+import { authOptions } from '../../lib/authoptions';
 import { error } from 'console';
 const apiKey = process.env.CHAT_API;
 const openai = new OpenAI({ apiKey: apiKey });

@@ -6,7 +6,7 @@ import AuthProvider from './auth/Provider';
 import SideBar from './sidebar';
 import { Toaster } from 'react-hot-toast';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../app/api/auth/[...nextauth]/route';
+import { authOptions } from './lib/authoptions';
 import QueryProvider from './QueryProvider';
 
 const inter = Inter({ subsets: ['latin'] });
