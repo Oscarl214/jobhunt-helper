@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: 'Job Hunt AI',
   description: 'A full stack app that helps get jobs',
 };
-
+//attempt 3
 export default async function RootLayout({
   children,
 }: {
