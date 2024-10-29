@@ -1,7 +1,4 @@
 import OpenAI from 'openai';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '../../lib/authoptions';
-import { error } from 'console';
 const apiKey = process.env.CHAT_API;
 const openai = new OpenAI({ apiKey: apiKey });
 
@@ -13,8 +10,6 @@ interface Job {
 }
 
 export async function POST(request: Request) {
-  const session = await getServerSession(authOptions);
-
   const { topic } = await request.json();
 
   const jobsDetails = `I am looking for job boards that list positions in the following fields: 
@@ -26,10 +21,6 @@ export async function POST(request: Request) {
   Do not respond with job listings, only provide job boards that fit these criteria. Respond with the links to the job boards also.`;
 
   try {
-    if (!session) {
-      return new Response('User is not logged in', { status: 401 });
-    }
-
     const response = await openai.chat.completions.create({
       messages: [
         {
