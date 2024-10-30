@@ -35,7 +35,7 @@ export default async function RootLayout({
         </QueryProvider>
       </body>
     </html>
-  );
+  ); //testing
 }
 
 //testing new url
