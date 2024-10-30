@@ -16,3 +16,5 @@ export const authOptions: NextAuthOptions = {
   },
   debug: true,
 };
+
+//migrated prisma schema to remote db
