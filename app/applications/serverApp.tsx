@@ -92,7 +92,7 @@ const ServerApps = () => {
             </TableCaption>
           ) : (
             applications?.map((app: Application) => (
-              <TableRow key={app.id} className="text-black">
+              <TableRow key={app.id} className="text-black hover:bg-purple-200">
                 <TableCell>{app.jobtitle}</TableCell>
                 <TableCell className="font-medium">{app.company}</TableCell>
                 <TableCell className="font-medium cursor-pointer">
