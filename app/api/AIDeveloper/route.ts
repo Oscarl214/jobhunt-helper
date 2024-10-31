@@ -27,7 +27,7 @@ export async function POST(request: Request) {
         },
       ],
       model: 'gpt-4',
-      max_tokens: 300,
+      max_tokens: 150,
     });
     return new Response(JSON.stringify(response), { status: 200 });
   } catch (error) {
