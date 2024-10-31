@@ -29,7 +29,7 @@ Job Application Tracker is a full-stack application designed to streamline job a
 
 ## Desktop
 
-https://github.com/user-attachments/assets/9ccac4eb-7fb4-4d62-8d38-5e759db84fef
+![Desktop View](![DesktopViewJobHunt](https://github.com/user-attachments/assets/e75b1477-16d9-4be0-a8ce-7a16ed6c4175)
 
 
 ## Mobile View
@@ -38,7 +38,7 @@ In The Works..
 
 ## Live
 
-![Desktop View](![DesktopViewJobHunt](https://github.com/user-attachments/assets/e75b1477-16d9-4be0-a8ce-7a16ed6c4175)
+https://jobhunt-helper.vercel.app
 
 ## License
 
