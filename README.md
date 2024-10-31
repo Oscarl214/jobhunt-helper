@@ -29,7 +29,8 @@ Job Application Tracker is a full-stack application designed to streamline job a
 
 ## Desktop
 
-![Desktop View]()
+[DesktopViewJobHunt](https://github.com/user-attachments/assets/9ccac4eb-7fb4-4d62-8d38-5e759db84fef)
+()
 
 ## Mobile View
 
