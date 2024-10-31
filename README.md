@@ -1,6 +1,6 @@
 # Job Application Tracker
 
-Job Application Tracker is a full-stack application designed to streamline job application management, helping users track, update, and organize their job applications across various industries. This application leverages AI for tailored job recommendations and integrates cloud storage for easy file uploads, all within a secure, user-friendly environment.
+Job Application Tracker is a full-stack application designed to streamline job application management, helping users track, update, and organize their job applications across the software development & public health fields. This application leverages AI for tailored job recommendations and integrates cloud storage for easy file uploads, all within a secure, user-friendly environment.
 
 - **Home Page:** Provides an overview of tracked job applications. Displays individual job application details, including position, company, status, date applied, & notes. Users can upload supporting documents, such as resumes and cover letters, using Cloudinary integration for seamless cloud storage. An edit function allows users to update their applications in real time.
 - **Job Board Page:** Users can search or filter based on fields like "Developer" or "Public Health" to view tailored job boards generated through OpenAI's API, presenting relevant positions dynamically.
