@@ -1,34 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Job Application Tracker
 
-## Getting Started
+Job Application Tracker is a full-stack application designed to streamline job application management, helping users track, update, and organize their job applications across various industries. This application leverages AI for tailored job recommendations and integrates cloud storage for easy file uploads, all within a secure, user-friendly environment.
 
-First, run the development server:
+- **Home Page:** Provides an overview of tracked job applications. Displays individual job application details, including position, company, status, date applied, & notes. Users can upload supporting documents, such as resumes and cover letters, using Cloudinary integration for seamless cloud storage. An edit function allows users to update their applications in real time.
+- **Job Board Page:** Users can search or filter based on fields like "Developer" or "Public Health" to view tailored job boards generated through OpenAI's API, presenting relevant positions dynamically.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Dynamic Routing:** Built with Next.js for server-side rendering, providing efficient and seamless navigation.
+- **Responsive Design:** Tailwind CSS ensures the layout adapts smoothly across desktop and mobile devices, enhancing user experience.
+- **AI Integration:** Utilizes OpenAI’s API to curate job listings specifically for developer and public health fields, delivering personalized job recommendations.
+- **File Uploads:** Integrated with Cloudinary for reliable, secure cloud storage of resumes, cover letters, and other essential documents.
+- **Data Management:** AWS RDS handles backend data storage, offering secure and scalable database management.
+- **Security:** Includes user authentication and authorization to protect data, ensuring each user’s information remains private and secure.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Next.js:** https://nextjs.org/
+- **React:** https://reactjs.org/
+- **Tailwind CSS:** https://tailwindcss.com/
+- **OpenAI API:** https://openai.com/
+- **Cloudinary:** https://cloudinary.com/
+- **AWS RDS:** https://aws.amazon.com/rds/
+- **Vercel:** https://vercel.com/
+- **Next-Auth:** https://next-auth.js.org/
+- **Yes-Icons:** https://yesicon.app/
+- **AWS S3 Bucket:** https://aws.amazon.com/s3/
 
-## Learn More
+## Desktop
 
-To learn more about Next.js, take a look at the following resources:
+![Desktop View]()
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Mobile View
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+In The Works..
 
-## Deploy on Vercel
+## Live
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Job Application Tracker](https://jobhunt-helper.vercel.app)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+
+This project is licensed under the [MIT License](LICENSE).
