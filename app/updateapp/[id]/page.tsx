@@ -262,11 +262,11 @@ const UpdateApp = () => {
           onClick={async () => {
             try {
               await newApplication({
-                jobtitle,
+                jobtitle: jobtitle || application.jobtitle || '',
                 status,
-                resume: resume || application.resume || '', // Use existing resume if no new one is uploaded
+                resume: resume || application.resume || '',
                 coverletter: cover || application.coverletter || '', // Use existing cover letter if no new one is uploaded
-                company,
+                company: company || application.company || '',
                 link,
                 notes,
                 // dateapplied,
