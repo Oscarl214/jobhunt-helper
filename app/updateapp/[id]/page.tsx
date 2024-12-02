@@ -50,7 +50,7 @@ const UpdateApp = () => {
   const queryClient = useQueryClient();
 
   const router = useRouter();
-
+  //Fix the UI Front End for this project
   const {
     data: application,
     isPending,
