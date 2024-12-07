@@ -51,6 +51,8 @@ const UpdateApp = () => {
 
   const router = useRouter();
   //Fix the UI Front End for this project
+  //Just adding some code here
+  //Going to Use Cursor to improve the AI
   const {
     data: application,
     isPending,
