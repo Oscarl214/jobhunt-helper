@@ -304,3 +304,5 @@ const UpdateApp = () => {
 };
 
 export default UpdateApp;
+
+// set up UI
